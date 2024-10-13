@@ -11,7 +11,8 @@
     width: 200px;
     border-radius: 50%;
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2), inset 0px 10px 30px 5px rgba(255, 255, 255, 1);
-  }
+    transition: width 0.3s ease, height 0.3s ease;
+  }  
 
   aside {
     display: flex;
@@ -45,5 +46,35 @@
 </aside>
 
 <script>
-  // your code here
+  const bubble = document.querySelector('.bubble');
+  const inflateButton = document.getElementById('inflate');
+  const deflateButton = document.getElementById('deflate');
+  const inflateSound = new Audio('inflate.mp3');
+  const deflateSound = new Audio('deflate.mp3');
+  const popSound = new Audio('pop.mp3');
+
+  let bubbleSize = 200;
+
+  deflateButton.addEventListener('click', () => {
+      if (bubbleSize > 20) {
+        bubbleSize -= 20;
+        bubble.style.width = `${bubbleSize}px`;
+        bubble.style.height = `${bubbleSize}px`;
+        deflateSound.play();
+      }
+    }
+  )
+
+  inflateButton.addEventListener('click', () => {
+      bubbleSize += 20;
+      bubble.style.width = `${bubbleSize}px`;
+      bubble.style.height = `${bubbleSize}px`;
+      inflateSound.play();
+
+      if (bubbleSize >= 400) {
+        bubble.style.display = 'none';
+        popSound.play();
+      }
+    }
+  )
 </script>
